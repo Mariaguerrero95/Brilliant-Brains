@@ -19,14 +19,14 @@
   }
   .container {
     padding: 22px 22px 0 22px;
-    background-color: var(--color-dark);
+    background-color: pink;
   }
-  
   
   .header {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 2.5rem;
+    align-items: center;
+    justify-content: space-between;
   }
   
   .header .header__brand {

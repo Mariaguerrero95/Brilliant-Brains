@@ -1,0 +1,12 @@
+.projectColor{
+    background-color: pink;
+    padding: 15px;
+}
+.previewGrid{
+    display: grid; // Activa el modo grid
+    grid-template-columns: repeat(2, 1fr); // Crea 2 columnas iguales
+    grid-gap: 40px; 
+    width: -50px;
+    height: -50px;
+    margin: 40px;
+}

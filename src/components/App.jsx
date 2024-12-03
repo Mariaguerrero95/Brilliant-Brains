@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Landing from "./Landing";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import Projects from "./Projects";
 
 function App() {
   const [project, setProject] = useState({
@@ -84,6 +85,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/projects" element={<Projects />} />
         <Route
           path="/main"
           element={
@@ -119,6 +121,7 @@ function App() {
                     url={url}
                   />
                 </main>
+
                 <Footer />
               </div>
             </>
