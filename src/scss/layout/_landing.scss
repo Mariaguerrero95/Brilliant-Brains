@@ -1,0 +1,29 @@
+.landing-container{
+    background-color: pink;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.link-container{
+    background-color: aquamarine;
+    width: 100px;
+    margin-top: 100px;
+    border: 5px solid #d0d0d0;
+    padding: 10px;
+}
+.landing-header{
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+.logo-landing-container{
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: flex-start;
+}
