@@ -11,7 +11,11 @@ server.use(cors());
 
 // correr el servidor en un puerto
 
+
 const port = 3001;
 server.listen(port, () => {
     console.log(`server is running in http://localhost:${port}` )
 })
+
+const staticServerPath = "./web/dist";
+server.use(express.static(staticServerPath));
