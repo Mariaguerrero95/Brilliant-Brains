@@ -95,7 +95,9 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route
           path="/projects"
-          element={<Projects projectsDetails={projectPreview} />}
+          element={
+            <Projects project={project} projectsDetails={projectPreview} />
+          }
         />
         <Route
           path="/main"

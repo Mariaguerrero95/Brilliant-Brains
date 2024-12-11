@@ -4,17 +4,15 @@ import Preview from "./Preview";
 import "../scss/components/Projects.scss";
 import Footer from "./Footer";
 
-function Projects({ projectsDetails }) {
-  projectsDetails.map();
+function Projects({ project, projectsDetails }) {
   return (
     <div className="projectColor">
       <Header />
       <Hero />
       <div className="previewGrid">
-        <Preview />
-        <Preview />
-        <Preview />
-        <Preview />
+        {projectsDetails.map((preview) => {
+          return <Preview project={preview} />;
+        })}
       </div>
       <Footer />
     </div>
