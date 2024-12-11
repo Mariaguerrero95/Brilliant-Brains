@@ -80,12 +80,23 @@ function App() {
       })
       .catch((error) => console.error("Error en la petición:", error));
   };
+  const [projectPreview, setProjectPreview] = useState({});
+  useEffect(() => {
+    fetch("http://localhost:3001/projects/list").then((res) =>
+      res.json().then((data) => {
+        setProjectPreview(data.message);
+      })
+    );
+  }, []);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/projects" element={<Projects />} />
+        <Route
+          path="/projects"
+          element={<Projects projectsDetails={projectPreview} />}
+        />
         <Route
           path="/main"
           element={
