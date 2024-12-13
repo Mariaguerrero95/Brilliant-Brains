@@ -1,9 +1,11 @@
 const express = require("express");
 const cors = require("cors");
+const mysql = require("mysql2/promise");
 
 //crear el servidor con express
 
 const server = express();
+server.use(express.json());
 
 // permitir peticiones
 
@@ -35,18 +37,46 @@ const projects = [{
     "photo": "",
 }
 ];
-server.get("/projects/list", (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: projects
+
+async function getBDConnection() {
+    const connection = await mysql.createConnection({
+        host: "iqi37.h.filess.io",
+        user: "BrilliantBrains_signalfat",
+        password: "b9990e8b796ee759b569deed45b1f8a236b630d1",
+        database: "BrilliantBrains_signalfat",
+        port: 3307
     })
-})
+    connection.connect();
+    return connection;
+
+}
+
 
 const port = 3001;
 server.listen(port, () => {
     console.log(`server is running in http://localhost:${port}`)
 })
 
+server.get("/projects/list", async (req, res) => {
+    /*
+        Conectar con la base de datos
+        Pedir la info a la base de datos
+        Cerrar conexión con base de datos
+        Enviar la respuesta a front
+
+    */
+    res.status(200).json({
+        success: true,
+        message: projects
+    })
+    const connection = await getBDConnection();
+    const info = req.body;
+    connection.end();
+    res.json({});
+})
+
 const staticServerPath = "./web/dist";
 server.use(express.static(staticServerPath));
+
+
 
