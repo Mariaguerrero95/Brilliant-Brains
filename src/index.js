@@ -46,6 +46,7 @@ async function getBDConnection() {
         password: "b9990e8b796ee759b569deed45b1f8a236b630d1",
         database: "BrilliantBrains_signalfat",
         port: 3307,
+        connectionLimit: 5
     });
     connection.connect();
     return connection;
