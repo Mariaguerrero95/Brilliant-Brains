@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
 
+
 //crear el servidor con express
 
 const server = express();
@@ -11,6 +12,9 @@ const server = express();
 
 server.use(cors());
 server.use(express.json({ limit: "25mb" }));
+
+require("dotenv").config();
+server.set("view engine", "ejs");
 
 // // correr el servidor en un puerto
 // const projects = [{
@@ -41,11 +45,11 @@ server.use(express.json({ limit: "25mb" }));
 
 async function getBDConnection() {
     const connection = await mysql.createConnection({
-        host: "iqi37.h.filess.io",
-        user: "BrilliantBrains_signalfat",
-        password: "b9990e8b796ee759b569deed45b1f8a236b630d1",
-        database: "BrilliantBrains_signalfat",
-        port: 3307,
+        host: "sql7.freesqldatabase.com",
+        user: process.env.USER_DB,
+        password: process.env.PASSWORD_DB,
+        database: "sql7752607",
+        port: process.env.PORT,
         connectionLimit: 5
     });
     connection.connect();
