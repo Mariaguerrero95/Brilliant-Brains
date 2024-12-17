@@ -11,6 +11,19 @@ import { Routes, Route } from "react-router-dom";
 import Projects from "./Projects";
 
 function App() {
+  const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
+  const URL_LOCAL = "http://localhost:3001";
+
+  const URL =
+    window.location.hostname === "localhost" ? URL_LOCAL : URL_PRODUCTION;
+
+  // useEffect(() => {
+  //   fetch(`${URL}/projects/list`)
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {});
+  // }, []);
   const [project, setProject] = useState({
     name: "Nombre del proyecto",
     slogan: "Slogan del proyecto",
