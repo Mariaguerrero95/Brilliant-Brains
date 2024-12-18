@@ -40,8 +40,8 @@ async function getBDConnection() {
 
 
 
-//ENDPOINT PARA CONECTAR CON LA BASE DE DATOS
-server.get("/projects/list", async (req, res) => {
+//MOTOR DE PLANTILLAS
+server.get("/projects/:idProject", async (req, res) => {
     /*
         Conectar con la base de datos
         Pedir la info a la base de datos
@@ -49,7 +49,7 @@ server.get("/projects/list", async (req, res) => {
         Enviar la respuesta a front
 
     */
-    const projectId = req.params.id;
+    const projectId = req.params.idProject;
     const connection = await getBDConnection();
     const sqlQuery = "SELECT * FROM proyects INNER JOIN author ON proyects.fk_author = author.idAuthor WHERE proyects.idProyect = ?";
     //ejecutar la Query (como el rayito del workbench)
@@ -69,56 +69,56 @@ server.get("/projects/list", async (req, res) => {
         });
     }
 });
+//ENDPOINT PARA VER LOS PROYECTOS
+server.get("/allProjects", async (req, res) => {
+    const connection = await getBDConnection();
+    const query = "SELECT * FROM author INNER JOIN proyects ON proyects.fk_author = author.idAuthor;";
+    const [result] = await connection.query(query);
+    connection.end();
+    if (result.length === 0) {
+        res.status(404).json({
+            status: "error",
+            message: "No hay ningún registro"
+        });
+    } else {
+        res.status(200).json({
+            status: "success",
+            message: result
+        })
+    }
+})
+
+
 //ENDPOINT PARA RECOGER LA INFORMACIÓN DE FRONTEND Y AÑADIRLA A LA BASE DE DATOS
 
+
 server.post("/api/projects", async (req, res) => {
-    // //     /*
-    // //         - Conectarme a la base de datos
-    // //         - Recoger la información que me envía frontend --> body params, req.body
-    // //         - Añadir la información a la tabla de estudiantes --> INSERT INTO
-    // //             - escribir la query
-    // //             - ejecutar la query
-    // //         - Finalizar la conexión
-    // //         - Responder al frontend
-
-    // //     */
-    const projectData = req.body; //recojo la info de frontend a través de body params
-    const connection = await getBDConnection();
-
-    console.log(projectData);
-    const query = "INSERT INTO proyects (name, slogan, repo, demo, tech, description, photo, url) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";//la interrogación representa los valores dinámicos que se introducirán
-    const [result] = await connection.query(query, [
-        projectData.name,
-        projectData.slogan,
-        projectData.repo,
-        projectData.demo,
-        projectData.tech,
-        projectData.description,
-        projectData.photo,
-        projectData.url
-    ]);
-    console.log(result);
-    connection.end();
-    res.status(201).json({
-        success: true,
-        id: result.insertId
-
-    });
-
-})
-server.post("/api/author", async (req, res) => {
     const authorData = req.body;
     const connection = await getBDConnection();
-    const query = "INSERT INTO author (name, job, image) VALUES(?, ?, ?)";
-    const [result] = await connection.query(query, [
-        authorData.name,
+    const query = "INSERT INTO author (authorName, job, image) VALUES(?, ?, ?)";
+    const [authorResult] = await connection.query(query, [
+        authorData.authorName,
         authorData.job,
         authorData.image
     ]);
+
+    //añadir proyecto a la tabla proyectos
+    const queryProject = "INSERT INTO proyects (name, slogan, repo, demo, tech, description, photo, url, fk_author) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const [projectResult] = await connection.query(queryProject, [
+        authorData.name,
+        authorData.slogan,
+        authorData.repo,
+        authorData.demo,
+        authorData.tech,
+        authorData.description,
+        authorData.photo,
+        authorData.url,
+        authorResult.insertId
+    ])
     connection.end();
     res.status(201).json({
         success: true,
-        id: result.insertId
+        cardURL: ""
 
     });
 
