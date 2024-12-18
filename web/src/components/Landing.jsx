@@ -12,7 +12,7 @@ function Landing() {
         <header className="landing-header">
           <h1>BRILLIANT BRAINS 💡</h1>
         </header>
-        <h2>
+        <h2 className="title">
           ¡Comparte tu pasión! Cuenta tu idea al mundo de la forma más atractiva
           posible.
         </h2>
