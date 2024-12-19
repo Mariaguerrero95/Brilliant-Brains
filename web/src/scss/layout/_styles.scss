@@ -122,7 +122,6 @@
     position: relative;
     margin: 15px 10px 1rem 0;
     text-align: center;
-    text-transform: capitalize;
   
     font: var(--font-card-section);
   }
@@ -184,7 +183,7 @@
   
   .card .card__descriptionTitle {
     font-weight: inherit;
-    text-transform: capitalize;
+    
   }
   
   .card .card__technicalInfo {
@@ -298,7 +297,7 @@
   
   .title {
     text-align: center;
-    text-transform: capitalize;
+    //text-transform: capitalize;
   }
   
   .logoSponsor {
