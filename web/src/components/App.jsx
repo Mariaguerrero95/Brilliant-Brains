@@ -9,6 +9,7 @@ import Landing from "./Landing";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Projects from "./Projects";
+//import detailProject from "../views/detailProject";
 
 function App() {
   const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
@@ -76,7 +77,7 @@ function App() {
   };
 
   const handleSubmitForm = () => {
-    fetch(`${URL}/api/projects`, {
+    fetch(`${URL}/projects/:idProject`, {
       method: "POST",
       body: JSON.stringify(project),
       headers: {
