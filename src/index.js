@@ -15,9 +15,12 @@ server.use(cors());
 server.use(express.json({ limit: "25mb" }));
 
 require("dotenv").config();
+
+//configurar el servidor para usar el motor de plantillas
+
 server.set("view engine", "ejs");
 
-const port = 3001;
+const port = process.env.PORT;
 server.listen(port, () => {
     console.log(`server is running in http://localhost:${port}`)
 })
@@ -30,7 +33,7 @@ async function getBDConnection() {
         user: process.env.USER_DB,
         password: process.env.PASSWORD_DB,
         database: "sql7752607",
-        port: process.env.PORT,
+        port: process.env.PORT_DB,
     });
     connection.connect();
     return connection;
@@ -52,7 +55,7 @@ server.get("/projects/:idProject", async (req, res) => {
     const connection = await getBDConnection();
     const sqlQuery = "SELECT * FROM proyects INNER JOIN author ON proyects.fk_author = author.idAuthor WHERE proyects.idProyect = ?";
     //ejecutar la Query (como el rayito del workbench)
-    const result = await connection.query(sqlQuery, [projectId]);
+    const [result] = await connection.query(sqlQuery, [projectId]);
     //cerrar la conexión con la base de datos
     connection.end();
     //enviar la respuesta a frontend
@@ -62,10 +65,7 @@ server.get("/projects/:idProject", async (req, res) => {
             message: "No se ha encontrado ningún resultado",
         });
     } else {
-        res.render({
-            status: "success",
-            message: result
-        });
+        res.render("detailProject", { project: result[0] });
     }
 });
 //ENDPOINT PARA VER LOS PROYECTOS
@@ -93,6 +93,7 @@ server.get("/allProjects", async (req, res) => {
 
 server.post("/api/projects", async (req, res) => {
     const authorData = req.body;
+    console.log(authorData);
     const connection = await getBDConnection();
     const query = "INSERT INTO author (authorName, job, image) VALUES(?, ?, ?)";
     const [authorResult] = await connection.query(query, [
@@ -117,11 +118,11 @@ server.post("/api/projects", async (req, res) => {
     connection.end();
     res.status(201).json({
         success: true,
-        cardURL: ""
+        cardURL: `http://localhost:3001/projects/${projectResult.insertId}`,
 
     });
 
-})
+});
 
 const staticServerPath = "./web/dist";
 server.use(express.static(staticServerPath));
