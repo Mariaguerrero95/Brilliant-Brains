@@ -22,8 +22,7 @@ server.listen(port, () => {
     console.log(`server is running in http://localhost:${port}`)
 })
 
-const staticServerPath = "./web/dist";
-server.use(express.static(staticServerPath));
+
 
 async function getBDConnection() {
     const connection = await mysql.createConnection({
@@ -63,7 +62,7 @@ server.get("/projects/:idProject", async (req, res) => {
             message: "No se ha encontrado ningún resultado",
         });
     } else {
-        res.status(200).json({
+        res.render({
             status: "success",
             message: result
         });
@@ -124,7 +123,8 @@ server.post("/api/projects", async (req, res) => {
 
 })
 
-
+const staticServerPath = "./web/dist";
+server.use(express.static(staticServerPath));
 
 
 
