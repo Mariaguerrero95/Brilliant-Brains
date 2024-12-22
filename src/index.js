@@ -24,6 +24,14 @@ const port = process.env.PORT;
 server.listen(port, () => {
     console.log(`server is running in http://localhost:${port}`)
 })
+const urlPort = process.env.PORT;
+const URL = process.env.PROD
+    ? "https://brilliant-brains.onrender.com"
+    : `http://localhost:${urlPort}`;
+console.log(process.env);
+server.listen(port, () => {
+    console.log(`Server is running in http://localhost:${urlPort}`);
+});
 
 
 
@@ -117,7 +125,7 @@ server.post("/api/projects", async (req, res) => {
     connection.end();
     res.status(201).json({
         success: true,
-        cardURL: `https://localhost:3001/projects/${projectResult.insertId}`,
+        cardURL: `${URL}/projects/${projectResult.insertId}`,
 
     });
 
