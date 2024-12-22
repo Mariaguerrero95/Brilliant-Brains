@@ -126,6 +126,9 @@ server.post("/api/projects", async (req, res) => {
 const staticServerPath = "./web/dist";
 server.use(express.static(staticServerPath));
 
+const pathServerPublicStyles = './src/public-css';
+server.use(express.static(pathServerPublicStyles));
+
 
 
 

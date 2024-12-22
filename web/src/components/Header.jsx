@@ -1,4 +1,4 @@
-import icon from "../images/adalab.png";
+//import icon from "../images/adalab.png";
 import laptop from "../images/laptop-code-solid.svg";
 
 const Header = () => {
