@@ -9,13 +9,14 @@ import Landing from "./Landing";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Projects from "./Projects";
+//import detailProject from "../views/detailProject";
 
 function App() {
-  const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
-  const URL_LOCAL = "http://localhost:3001";
+  // const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
+  // const URL_LOCAL = "http://localhost:3001";
 
-  const URL =
-    window.location.hostname === "localhost" ? URL_LOCAL : URL_PRODUCTION;
+  // const URL =
+  //   window.location.hostname === "localhost" ? URL_LOCAL : URL_PRODUCTION;
 
   // useEffect(() => {
   //   fetch(`${URL}/projects/list`)
@@ -76,7 +77,7 @@ function App() {
   };
 
   const handleSubmitForm = () => {
-    fetch("https://dev.adalab.es/api/projectCard", {
+    fetch(`http://localhost:3001/api/projects`, {
       method: "POST",
       body: JSON.stringify(project),
       headers: {
@@ -95,7 +96,7 @@ function App() {
   };
   const [projectPreview, setProjectPreview] = useState({});
   useEffect(() => {
-    fetch("http://localhost:3001/projects/list").then((res) =>
+    fetch("http://localhost:3001/allProjects").then((res) =>
       res.json().then((data) => {
         setProjectPreview(data.message);
       })

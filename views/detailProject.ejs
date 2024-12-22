@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/laptop-code-solid.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css" />
+    <title>Proyecto en detalle</title>
+</head>
+<body>
+    <header>
+        <%- include("./partials/header") %>
+    </header>
+    <main>
+        <body class="body_ejs">
+        <div class="bodyCard_ejs">
+            <div class="card_ejs">
+                <img src= "<%=  project.image  %>" alt="Imagen del proyecto">
+                <p>Nombre: <%=  project.name  %> </p>
+                <p>Slogan: <%=  project.slogan  %> </p>
+                <p>Repo: <%=  project.repo  %></p>
+                <p>Demo: <%=  project.demo  %></p>
+                <p>Tech: <%=  project.slogan  %></p>
+                <p>Description: <%=  project.description  %></p>
+                <p><img src="<%=  project.photo  %>" alt=""></p>
+                <p>Autor: <%=  project.authorName  %></p>
+                <p>Job: <%=  project.job  %></p>
+            
+            </div>
+        </div>
+        </body>
+
+
+    </main>
+    
+    
+    
+</body>
+</html>
