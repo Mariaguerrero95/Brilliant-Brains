@@ -24,15 +24,10 @@ const port = process.env.PORT;
 server.listen(port, () => {
     console.log(`server is running in http://localhost:${port}`)
 })
-const urlPort = process.env.PORT;
+
 const URL = process.env.PROD
     ? "https://brilliant-brains.onrender.com"
-    : `http://localhost:${urlPort}`;
-console.log(process.env);
-server.listen(port, () => {
-    console.log(`Server is running in http://localhost:${urlPort}`);
-});
-
+    : `http://localhost:${port}`;
 
 
 async function getBDConnection() {
