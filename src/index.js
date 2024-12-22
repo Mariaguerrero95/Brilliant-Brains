@@ -117,7 +117,7 @@ server.post("/api/projects", async (req, res) => {
     connection.end();
     res.status(201).json({
         success: true,
-        cardURL: `http://localhost:3001/projects/${projectResult.insertId}`,
+        cardURL: `https://localhost:3001/projects/${projectResult.insertId}`,
 
     });
 

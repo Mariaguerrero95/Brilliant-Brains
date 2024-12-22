@@ -11,17 +11,13 @@ import { Routes, Route } from "react-router-dom";
 import Projects from "./Projects";
 //import detailProject from "../views/detailProject";
 
-const URL_PRODUCTION = "http://brilliant-brains.onrender.com";
-const URL_LOCAL = `http://localhost:${import.meta.env.VITE_PORT}`;
+const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
+const URL_LOCAL = `https://localhost:${import.meta.env.VITE_PORT}`;
 
-const URL =
-  import.meta.env.PROD ? URL_PRODUCTION : URL_LOCAL;
-
+const URL = import.meta.env.PROD ? URL_PRODUCTION : URL_LOCAL;
 
 function App() {
-
-  console.log('Entorno:', import.meta.env.PROD);
-
+  console.log("Entorno:", import.meta.env.PROD);
 
   const [project, setProject] = useState({
     name: "Nombre del proyecto",
