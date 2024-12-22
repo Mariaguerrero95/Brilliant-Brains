@@ -103,7 +103,7 @@ server.post("/api/projects", async (req, res) => {
     ]);
 
     //añadir proyecto a la tabla proyectos
-    const queryProject = "INSERT INTO proyects (name, slogan, repo, demo, tech, description, photo, url, fk_author) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const queryProject = "INSERT INTO proyects (name, slogan, repo, demo, tech, description, photo, fk_author) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
     const [projectResult] = await connection.query(queryProject, [
         authorData.name,
         authorData.slogan,
@@ -112,7 +112,6 @@ server.post("/api/projects", async (req, res) => {
         authorData.tech,
         authorData.description,
         authorData.photo,
-        authorData.url,
         authorResult.insertId
     ])
     connection.end();

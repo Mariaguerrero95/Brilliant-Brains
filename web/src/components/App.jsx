@@ -12,11 +12,11 @@ import Projects from "./Projects";
 //import detailProject from "../views/detailProject";
 
 function App() {
-  const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
-  const URL_LOCAL = "http://localhost:3001";
+  // const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
+  // const URL_LOCAL = "http://localhost:3001";
 
-  const URL =
-    window.location.hostname === "localhost" ? URL_LOCAL : URL_PRODUCTION;
+  // const URL =
+  //   window.location.hostname === "localhost" ? URL_LOCAL : URL_PRODUCTION;
 
   // useEffect(() => {
   //   fetch(`${URL}/projects/list`)
@@ -77,7 +77,7 @@ function App() {
   };
 
   const handleSubmitForm = () => {
-    fetch(`${URL}/projects/:idProject`, {
+    fetch(`http://localhost:3001/api/projects`, {
       method: "POST",
       body: JSON.stringify(project),
       headers: {
