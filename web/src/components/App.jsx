@@ -96,7 +96,7 @@ function App() {
   };
   const [projectPreview, setProjectPreview] = useState({});
   useEffect(() => {
-    fetch("http://localhost:3001/api/projects").then((res) =>
+    fetch("http://localhost:3001/allProjects").then((res) =>
       res.json().then((data) => {
         setProjectPreview(data.message);
       })
