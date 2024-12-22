@@ -11,20 +11,18 @@ import { Routes, Route } from "react-router-dom";
 import Projects from "./Projects";
 //import detailProject from "../views/detailProject";
 
+const URL_PRODUCTION = "http://brilliant-brains.onrender.com";
+const URL_LOCAL = `http://localhost:${import.meta.env.VITE_PORT}`;
+
+const URL =
+  import.meta.env.PROD ? URL_PRODUCTION : URL_LOCAL;
+
+
 function App() {
-  // const URL_PRODUCTION = "https://brilliant-brains.onrender.com";
-  // const URL_LOCAL = "http://localhost:3001";
 
-  // const URL =
-  //   window.location.hostname === "localhost" ? URL_LOCAL : URL_PRODUCTION;
+  console.log('Entorno:', import.meta.env.PROD);
 
-  // useEffect(() => {
-  //   fetch(`${URL}/projects/list`)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {});
-  // }, []);
+
   const [project, setProject] = useState({
     name: "Nombre del proyecto",
     slogan: "Slogan del proyecto",
@@ -77,7 +75,7 @@ function App() {
   };
 
   const handleSubmitForm = () => {
-    fetch(`http://localhost:3001/api/projects`, {
+    fetch(`${URL}/api/projects`, {
       method: "POST",
       body: JSON.stringify(project),
       headers: {
@@ -96,7 +94,7 @@ function App() {
   };
   const [projectPreview, setProjectPreview] = useState({});
   useEffect(() => {
-    fetch("http://localhost:3001/allProjects").then((res) =>
+    fetch(`${URL}/allProjects`).then((res) =>
       res.json().then((data) => {
         setProjectPreview(data.message);
       })
